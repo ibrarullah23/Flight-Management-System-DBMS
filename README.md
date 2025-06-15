@@ -103,28 +103,28 @@ The project showcases extensive use of core DBMS features:
 
 
 ##  ERD 
-![ER Diagram ](images/1.jpg)
+![ER Diagram ](Images/1.jpg)
 
 
 ---
 
 ## 📷 Screenshots
 
-![Screen Shot](images/2.jpg)
+![Screen Shot](Images/2.jpg)
 
-![Screen Shot](images/3.jpg)
+![Screen Shot](Images/3.jpg)
 
-![Screen Shot](images/4.jpg)
+![Screen Shot](Images/4.jpg)
 
-![Screen Shot](images/5.jpg)
+![Screen Shot](Images/5.jpg)
 
-![Screen Shot](images/6.jpg)
+![Screen Shot](Images/6.jpg)
 
-![Screen Shot](images/7.jpg)
+![Screen Shot](Images/7.jpg)
 
-![Screen Shot](images/8.jpg)
+![Screen Shot](Images/8.jpg)
 
-![Screen Shot](images/9.jpg)
+![Screen Shot](Images/9.jpg)
 
 ---
 
