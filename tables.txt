@@ -1,0 +1,473 @@
+create table city(
+city_ID number primary key,
+city_Name varchar2(35),
+country varchar2(35));
+
+ALTER TABLE city ADD CONSTRAINT 
+U_City UNIQUE (city_name);
+-------------------------------
+CREATE SEQUENCE seq_city
+START WITH 1
+INCREMENT BY 1;
+------------------------------------------
+create table airport(
+airport_Name varchar2(35) primary key,
+airport_City number,
+foreign key (airport_City) references city(city_ID));
+----------------------------------------------------------
+
+--------------------------------
+create table airline(
+airline_ID number primary key,
+airline_Name varchar2(35) ,
+airline_City number,
+constraint fk_Country foreign key (airline_City) references city(city_id));
+----------------------------------------------------------------------------
+CREATE SEQUENCE seq_airline
+START WITH 1
+INCREMENT BY 1;
+-----------------------------------------------------------------------------------
+create table airplane(
+reg_No varchar2(35) primary key,
+model varchar2(35),
+airline_ID number,
+capacity number,
+foreign key (airline_ID) references airline(airline_ID));
+------------------------------------------------------------
+
+create table crew(
+crew_ID number primary key,
+crew_Name varchar2(35),
+role varchar2(35),
+gender varchar2(35),
+airline_ID number,
+foreign key (airline_ID) references airline(airline_ID));
+----------------------------------------------------------------------------
+CREATE SEQUENCE seq_crew
+START WITH 1
+INCREMENT BY 1;
+------------------------------------------------------------------------------
+create  table flight_Details(
+flight_ID number primary key,
+reg_NO varchar2(35),
+Departure_Loc varchar2(35),
+Arrival_Loc varchar2(35),
+Departure_Date Date,
+Arrival_Date Date,
+flight_time varchar2(35),
+foreign key (reg_NO) references airplane(reg_NO),
+foreign key (Departure_Loc) references airport(airport_Name),
+foreign key (Arrival_Loc) references airport(airport_Name),
+check (Arrival_Date>Departure_Date));
+----------------------------------------------------------------------------
+CREATE SEQUENCE seq_flight
+START WITH 1
+INCREMENT BY 1;
+---------------------------------------------------------------
+create  table flight_Crew(
+flight_ID number,
+crew_ID number,
+primary key (flight_ID,crew_ID),
+foreign key (crew_ID) references crew(crew_ID));
+
+
+
+
+
+------------------
+cities data
+-------------------
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'New York', 'United States');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Los Angeles', 'United States');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Chicago', 'United States');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Miami', 'United States');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Houston', 'United States');
+
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'London', 'United Kingdom');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Manchester', 'United Kingdom');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Birmingham', 'United Kingdom');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Glasgow', 'United Kingdom');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Liverpool', 'United Kingdom');
+
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Tokyo', 'Japan');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Osaka', 'Japan');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Nagoya', 'Japan');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Sapporo', 'Japan');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Fukuoka', 'Japan');
+
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Sydney', 'Australia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Melbourne', 'Australia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Brisbane', 'Australia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Perth', 'Australia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Adelaide', 'Australia');
+
+-- Country 3: Germany
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Berlin', 'Germany');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Munich', 'Germany');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Hamburg', 'Germany');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Cologne', 'Germany');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Frankfurt', 'Germany');
+
+-- Country 4: France
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Paris', 'France');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Marseille', 'France');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Lyon', 'France');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Toulouse', 'France');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Nice', 'France');
+
+-- Country 5: China
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Beijing', 'China');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Shanghai', 'China');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Guangzhou', 'China');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Shenzhen', 'China');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Chengdu', 'China');
+
+-- Country 6: India
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Mumbai', 'India');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Delhi', 'India');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Bangalore', 'India');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Hyderabad', 'India');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Chennai', 'India');
+
+-- Country 7: Brazil
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Sao Paulo', 'Brazil');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Rio de Janeiro', 'Brazil');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Brasilia', 'Brazil');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Salvador', 'Brazil');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Fortaleza', 'Brazil');
+
+-- Country 8: Russia
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Moscow', 'Russia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Saint Petersburg', 'Russia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Novosibirsk', 'Russia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Yekaterinburg', 'Russia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Nizhny Novgorod', 'Russia');
+
+-- Country 9: Canada
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Toronto', 'Canada');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Vancouver', 'Canada');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Montreal', 'Canada');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Calgary', 'Canada');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Ottawa', 'Canada');
+
+-- Country 10: South Africa
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Johannesburg', 'South Africa');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Cape Town', 'South Africa');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Durban', 'South Africa');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Pretoria', 'South Africa');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Port Elizabeth', 'South Africa');
+
+-- Country 11: Mexico
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Mexico City', 'Mexico');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Guadalajara', 'Mexico');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Monterrey', 'Mexico');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Puebla', 'Mexico');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Tijuana', 'Mexico');
+
+-- Country 12: Indonesia
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Jakarta', 'Indonesia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Surabaya', 'Indonesia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Bandung', 'Indonesia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Medan', 'Indonesia');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Semarang', 'Indonesia');
+
+-- Country 13: Nigeria
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Lagos', 'Nigeria');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Kano', 'Nigeria');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Ibadan', 'Nigeria');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Abuja', 'Nigeria');
+
+INSERT INTO city (city_id, city_name, country)
+VALUES (seq_city.nextval, 'Kaduna', 'Nigeria');
+
+
+
+
+
+create or replace view flight_pilot as
+select f.flight_id,c.crew_name,c.role
+from flight_crew f,crew c
+where f.crew_id=c.crew_id;
+
+
+create or replace view flight_pilot as
+select fc.flight_id,
+fc.crew_id,
+cd.crew_name,
+cd.role,
+cd.gender,
+fd.departure_loc,
+fd.arrival_loc,
+fd.departure_date,
+fd.arrival_date
+from flight_crew fc
+join crew cd on fc.crew_id = cd.crew_id
+join flight_details fd on fc.flight_id = fd.flight_id;
+
+
+
+
+create or replace view v_flight_history as
+select fd.flight_id,
+al.airline_name,
+fd.reg_no,
+fd.arrival_loc,
+fd.departure_loc,
+fd.arrival_date,
+fd.departure_date,
+fd.flight_time
+from flight_details fd
+join airplane a on fd.reg_no = a.reg_no
+join airline al on a.airline_id = al.airline_id;
+
+
+create or replace view v_flight_history as
+select fd.flight_id,
+al.airline_name,
+fd.reg_no,
+fd.arrival_loc,
+fd.departure_loc,
+fd.arrival_date,
+fd.departure_date,
+fd.flight_time
+from flight_details fd,airplane a,airline al
+where fd.reg_no= a.reg_no and a.airline_id = al.airline_id;
+
+
+
+create or replace view v_flight_history as
+SELECT al.airline_ID, al.airline_Name, COUNT(fd.flight_ID) AS total_flights
+FROM airline al
+LEFT JOIN airplane a ON al.airline_ID = a.airline_ID
+LEFT JOIN flight_Details fd ON a.reg_No = fd.reg_NO
+GROUP BY al.airline_ID, al.airline_Name;
+
+
+inner join airplane a on fd.reg_no =a.reg_no
+inner join airline al on a.airline_id = al.airline_id;
+
+select * from v_flight_history where arrival_loc='' and
+departure_loc='';
+
+
+
+
+
+
+
+create or replace view crew_history as
+select rownum as S_NO,c.crew_name as NAME,c.role,f.flight_id as FLIGHT_ID,f.Departure_Date as FLIGHT_DATE,f.Departure_Loc as DEPARTURE,f.Arrival_Loc as ARRIVAL,a.model as PLANE
+from crew c,flight_crew fc,flight_details f,airplane a
+where fc.crew_id=c.crew_id and fc.flight_id=f.flight_id and f.reg_no=a.reg_no;
+
+
+
+
+
+
+
+
+
+
+CREATE OR REPLACE TRIGGER restrict_crew_flights
+BEFORE INSERT or update ON flight_crew
+FOR EACH ROW
+DECLARE
+    existing_flights_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO existing_flights_count
+    FROM flight_crew fc JOIN flight_details fd ON fc.flight_id = fd.flight_id
+    WHERE fc.crew_id = :new.crew_id
+      AND fd.departure_date = :new.(fd.departure_date);
+
+   
+    IF existing_flights_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Crew is already assigned to another flight on the same day');
+    END IF;
+END;
+/
+--------------------------------------------
+CREATE OR REPLACE TRIGGER restrict_crew_flights
+BEFORE INSERT or update ON flight_crew
+FOR EACH ROW
+DECLARE
+    existing_flights_count NUMBER;
+DD date;
+BEGIN
+select departure_date into dd from flight_details
+where flight_id=:new.flight_id;
+    SELECT COUNT(*) INTO existing_flights_count
+    FROM flight_crew fc JOIN flight_details fd ON fc.flight_id = fd.flight_id
+    WHERE fc.crew_id = :new.crew_id
+      AND fd.departure_date = DD;
+
+   
+    IF existing_flights_count > 0 THEN
+	delete from FLIGHT_DETAILS where flight_id=:new.flight_id;
+        RAISE_APPLICATION_ERROR(-20001, 'Crew is already assigned to another flight on the same day');
+    END IF;
+END;
+/
+
+
+
+
+
+
+CREATE OR REPLACE TRIGGER avoid_past_dates
+BEFORE INSERT or update ON flight_details
+FOR EACH ROW
+DECLARE
+    current_date DATE;
+BEGIN
+    
+    current_date := SYSDATE;
+
+    
+    IF :NEW.Departure_Date < current_date THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Departure date cannot be in the past');
+    END IF;
+
+    
+    IF :NEW.Arrival_Date < current_date THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Arrival date cannot be in the past');
+    END IF;
+END;
+/
+
